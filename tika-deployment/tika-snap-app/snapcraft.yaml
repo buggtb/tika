@@ -16,7 +16,7 @@
 # under the License.
 
 name: tika-app
-version: '1.16-SNAPSHOT'
+version: '1.17'
 summary: Tika Application for metadata discovery and extraction
 description: Apache Tika is a content detection and analysis framework, written 
       in Java, stewarded at the Apache Software Foundation.It detects and extracts 
@@ -30,7 +30,7 @@ confinement: strict
 apps:
    run:
     command: java -jar  -Duser.home=$SNAP_USER_DATA $SNAP/jar/tika-app-$SNAP_VERSION.jar
-    plugs: [home, removable-media]
+    plugs: [home, removable-media, x11, network]
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-8-openjdk-amd64
       PATH: $JAVA_HOME/jre/bin:$PATH
@@ -43,3 +43,5 @@ parts:
     source: ../../tika-app
     plugin: maven
     maven-options: [-DskipTests]
+    stage-packages:
+        - tesseract-ocr-all

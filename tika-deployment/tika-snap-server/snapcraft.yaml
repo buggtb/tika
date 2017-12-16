@@ -16,7 +16,7 @@
 # under the License.
 
 name: tika-server
-version: '1.16-SNAPSHOT'
+version: '1.17'
 summary: Tika Server for metadata discovery and extraction 
 description: Apache Tika is a content detection and analysis framework, written 
       in Java, stewarded at the Apache Software Foundation.It detects and extracts 
@@ -31,9 +31,13 @@ apps:
    run:
     command: 
        java -jar $SNAP/jar/tika-server-$SNAP_VERSION.jar
+       plugs: [removable-media, network]
 
 parts:
   compile-tika:
     source: ../../tika-server
     plugin: maven
     maven-options: [-DskipTests]
+    stage-packages:
+        - tesseract-ocr-all
+
